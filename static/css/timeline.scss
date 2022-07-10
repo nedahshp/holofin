@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css?family=Niramit:300,300i,700');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// colors
+$primary: #1d8cf8;
+$secondary: #73869c;
+$info: #11cdef;
+$success: #00bf9a;
+$warning: #ff8d72;
+$danger: #fd5d93;
+
+// timeline variables
+$body-bg: #1e1e2f;
+$timeline-before-bg : #222a42;
+$timeline-body-bg: #73869c;
+$timeline-body-round: 3px;
+$timeline-body-shadow: 1px 3px 9px rgba(0,0,0, .1);
+
+$small: 600px;
+$medium: 1200px;
+$large: 1400px;
+$x-large: 1920px;
+
+
+// typography
+.timeline p {
+    font-weight: 300;
+    line-height: 1.5;
+    font-size: 14px;
+    opacity: .8;
+}
+
+// timeline style
+.timeline {
+    position: relative;
+    padding-right: 65px;
+    margin: 0 30px 0 0;
+    color: white;
+
+    @media screen and (max-width: $medium) {
+        padding-right: 0;
+        margin: 0;
+    }
+
+
+    &:before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: $timeline-body-bg;
+
+        @media screen and (max-width: $medium) {
+            display: none;
+        }
+            
+    }
+
+    .timeline-container {
+        position: relative;
+        margin-bottom: 2.5rem;;
+
+        .timeline-icon {
+            position: absolute;
+            right: -88px;
+            top: 4px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 2rem;
+            background: $secondary;
+
+            @media screen and (max-width: $medium) {
+                display: none;
+            }
+
+            i {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
+
+        .timeline-body {
+            background: $timeline-body-bg;
+            border-radius: $timeline-body-round;
+            padding: 20px 20px 15px;
+            box-shadow: $timeline-body-shadow;
+
+            &:before {
+                content: '';
+                background: inherit;
+                width: 20px;
+                height: 20px;
+                display: block;
+                position: absolute;
+                right: -10px;
+                transform: rotate(45deg);
+                border-radius: 0 0 0 2px;
+            }
+
+            .timeline-card-header {
+
+                display: flex;
+                justify-content: space-between;
+
+                .timeline-title {
+                    margin-bottom: 1.4rem;
+
+                    .badge {
+                        background: $body-bg;
+                        padding: 4px 8px;
+                        border-radius: 3px;
+                        font-size: 12px;
+                        font-weight: bold;
+                    }
+
+                    small {
+                        color: #bcbcbc;
+                        display: block;
+                        margin-top: 5px;
+                    }
+
+                }
+
+                .timeline-price {
+                    font-size: x-large;
+                    color: greenyellow;
+                    margin-top: 10px;
+                }
+
+            }
+
+            .timeline-card-subheader {
+
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .timeline-card-body {
+                margin: 20px 0px;
+
+                table {
+                    width: 100%;
+                    border: 1px solid #aaa;
+                    margin-top: 20px;
+
+                    thead {
+                        border-bottom: 1px solid #aaa;
+                    }
+
+                    tr {
+                        td, th {
+                            padding: 10px;
+                        }
+                    }
+
+                    .colspan {
+                        text-align: center;
+                    }
+                }
+            }
+
+        }
+
+        // Primary Timeline
+        &.primary {
+            .badge,
+            .timeline-icon {
+                background: $primary !important;
+            }
+        }
+
+        // Info Timeline
+        &.info {
+            .badge,
+            .timeline-icon {
+                background: $info !important;
+            }
+        }
+
+        // Success Timeline
+        &.success {
+            .badge,
+            .timeline-icon {
+                background: $success !important;
+            }
+        }
+
+        // Warning Timeline
+        &.warning {
+            .badge,
+            .timeline-icon {
+                background: $warning !important;
+            }
+        }
+
+        // Dnager Timeline
+        &.danger {
+            .badge,
+            .timeline-icon {
+                background: $danger !important;
+            }
+        }
+
+        .action-buttons {
+            margin-top: 5px;
+            padding: 10px 0px;
+
+            a {
+                color: #f4f4ff;
+                background-color: $timeline-before-bg;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                margin: 0px;
+                transition: all 0.2s linear;
+            }
+
+            a:hover {
+                background-color: $timeline-body-bg;
+            }
+        }
+
+    }
+}
+
+
+.timeline-image-gallery {
+    padding-top: 20px;
+    display: grid;
+    gap: 1.5rem;
+    text-align: center;
+    grid-template-columns: repeat(4, 1fr);
+
+    @media screen and (max-width: $x-large) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: $large) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: $small) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    img {
+        margin-bottom: 5px;
+    }
+
+    .image-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 1px solid #aaa;
+
+        &:hover {
+            border: 1px solid #aaa;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #aaa;
+
+            h5 {
+                font-size: 12px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+
+            .actions {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+                font-weight: bold;
+                color: #bcbcbc;
+                cursor: pointer;
+            }
+
+        }
+
+        .body {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            a {
+                width: 100%;
+                height: 150px;
+                display: block;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-top: 1px solid #aaa;
+
+            p {
+                font-size: 10px;
+                margin-top: 5px;
+            }
+        }
+    }
+}
+
+
+.author{
+	font-family: inherit;
+	padding: 3em;
+	text-align: center;
+	width: 100%;
+		color: white;
+ 
+	a:link,
+	a:visited{
+		color: white;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+	.btn:link,
+	.btn:visited{
+		margin-top: 1em;
+		text-decoration: none;
+		display: inline-block;
+		font-family: inherit;
+		font-weight: 100;
+		color: white;
+		text-align: center;
+		vertical-align: middle;
+		user-select: none;
+		background-color: black;
+		padding: 1.5em 2rem;
+		border-radius: 1em;
+		transition: .5s all;
+		&:hover,
+		&:focus,
+		&:active{
+			background-color: lighten(black, 10%);
+		}
+	}
+}

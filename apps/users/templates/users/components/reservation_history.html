@@ -1,0 +1,89 @@
+{% load jalali_tags humanize %}
+
+<div class="treatment-history">
+    <div class="timeline">
+        {% for reservation in reservations %}
+            <div class="timeline-container">
+                <div class="timeline-icon">
+                    <i class="far fa-grin-beam-sweat"></i>
+                </div>
+                <div class="timeline-body reservation" data-id={{reservation.id}}>
+                    <div class="timeline-card-header">
+                        <h4 class="timeline-title">
+                            {{reservation.book_time.date|to_jalali:"%Y/%m/%d"}} ساعت
+                            {{reservation.book_time.get_time_in_day_display}}
+                            <small>تاریخ ویزیت: {{reservation.visited_at|to_jalali:"%Y/%m/%d %H:%M:%S"}}</small>
+                        </h4>
+                        <span class="timeline-price">{{reservation.total_price|intcomma:False}} تومان</span>
+                    </div>
+                    <div class="timeline-card-body">
+                        <div id="services">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" class="colspan">سرویس‌ها</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for service in reservation.services.all %}
+                                        <tr>
+                                            <td>{{service.service_name}}</td>
+                                            <td>{{service.final_price|intcomma:False}} تومان</td>
+                                            <td>{{service.brand}}</td>
+                                            <td>{{service.amount}}</td>
+                                        </tr>
+                                        {% if service.description %}
+                                        <tr><td colspan="4" class="colspan">{{service.description}}</td>
+                                        {% endif %}
+                                    {% empty %}
+                                        <tr><td colspan="4" class="colspan">هیچ سرویسی وجود ندارد</td></tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="medicines">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2" class="colspan">دارو‌ها</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for medicine in reservation.medicines.all %}
+                                        <tr>
+                                            <td>{{medicine.medicine.name}}</td>
+                                            <td>{{medicine.how_to_use}}</td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr><td colspan="2" class="colspan">هیچ دارویی وجود ندارد</td></tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="timeline-card-description">
+                        
+                    </div>
+                    {% include 'users/components/image_gallery.html' with images=reservation.images.all %}
+                </div>
+                <div class="action-buttons">
+                    <a href="{% url 'clinic:new_service' reservation.id %}">سرویس جدید</a>
+                    <a href="{% url 'clinic:new_image' reservation.id %}">تصویر جدید</a>
+                    <a href="{% url 'clinic:new_medicine' reservation.id %}">داروی جدید</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-result">هیچ سابقه درمانی وجود ندارد</p>
+        {% endfor %}
+        {% if reservations %}
+            <div class="timeline-container">
+                <div class="timeline-icon">
+                    <i class="far fa-grin-beam-sweat"></i>
+                </div>
+                <div class="timeline-body" data-id={{reservation.id}}>
+                    <h4 class="timeline-title"><span class="badge">شروع درمان</span></h4>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

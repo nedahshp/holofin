@@ -1,0 +1,45 @@
+{% extends 'gentellela/auth_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+  <div class="header-title">
+    <h1> صندوق وام خانگی</h1>
+  </div>
+  <div class="animate form login_form">
+    <section class="login_content">
+      <form method="POST" action="{% url 'auth:login' %}">
+        {% csrf_token %}
+        <h4>{% trans 'فرم ورود' %}</h4>
+        <div>
+          <input type="text" class="form-control" placeholder="{% trans 'موبایل' %}" required="yes"
+            id="id_username" name="username" />
+        </div>
+        <div>
+          <input type="password" class="form-control" placeholder="{% trans 'رمز عبور' %}" required="yes"
+            id="id_password" name="password" />
+        </div>
+        <div>
+          {% if form.errors %}
+          <div class="alert alert-danger alert-dismissible fade in">
+            {% for error in form.non_field_errors %}
+            {{error}}
+            {% endfor %}
+            {% endif %}
+          </div>
+          <div>
+            <input type="submit" class="btn btn-default submit" value="ورود" />
+            <input type="hidden" name="next" value="{{next}}" />
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="separator">
+            <a class="sub-link" href="{% url 'auth:register' %}">{% trans 'نیاز به حساب کاربری دارید؟' %}</a>
+          </div>
+          <div class="login_footer">
+            {% include 'gentellela/page_footer.html' %}
+          </div>
+
+      </form>
+    </section>
+  </div>
+{% endblock content %}

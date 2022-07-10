@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static jalali_tags %}
+
+{% block extra_head %}
+    <link href="{% static 'css/timeline.css' %}" rel="stylesheet" />
+{% endblock extra_head %}
+
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="book-time-container">
+                <div class="header">
+                </div>
+                <div class="body">
+                    <div class="user-header">
+                        <h1>{{patient.get_full_name}}</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="user-info">
+                                <table>
+                                    <tr>
+                                        <td>شماره موبایل:</td>
+                                        <td>{{patient.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تاریخ تولد:</td>
+                                        <td>{{patient.birth_date|default:"-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>شغل:</td>
+                                        <td>{{patient.career|default:"-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>وضعیت تاهل:</td>
+                                        <td>{{patient.marriage_status|default:"-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>جنسیت:</td>
+                                        <td>{{patient.gender|default:"-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>آدرس:</td>
+                                        <td>{{patient.address|default:"-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>تفلن ثابت:</td>
+                                        <td>{{patient.phone_number|default:"-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>بیماری‌های فعلی:</td>
+                                        <td>{% for ilness in patient.current_illness.all %}
+                                                <div>{{ilness}}</div>
+                                            {% empty %}
+                                                <div>-</div>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>داروهای مصرفی:</td>
+                                        <td>{{patient.current_medicines|default:"-"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>سوابق درمانی:</td>
+                                        <td>{{patient.treatment_history|default:"-"}}</td>
+                                    </tr>
+                                </table>
+
+                                <div class="action-buttons">
+                                    <a class="btn btn-default" href="{% url 'users:patient_edit' patient.id %}">
+                                        <i class="fa fa-edit"></i> ویرایش پرونده
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="x_content">
+                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab1" class="nav nav-tabs bar_tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#historyTabContent" id="historyTab" role="tab" data-toggle="tab"
+                                                aria-controls="history" aria-expanded="true">سابقه درمان</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#galleryTabContent" id="galleryTab" role="tab" data-toggle="tab"
+                                                aria-controls="gallery" aria-expanded="true">گالری تصاویر</a>
+                                        </li>
+                                    </ul>
+                                    <div id="MyTabContent2" class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active in" id="historyTabContent" aria-labelledby="history-tab">
+                                            {% include 'users/components/reservation_history.html' with reservations=patient.reservations.all %}
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="galleryTabContent" aria-labelledby="gallery-tab">
+                                            {% include 'users/components/image_gallery.html' with images=patient.images.all %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock page_content %}
+
+

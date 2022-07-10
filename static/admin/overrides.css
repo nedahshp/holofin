@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Vazir;
+    src: url("/static/fonts/Vazir/Vazir.woff2");
+}
+
+
+p, h1, h2, h3, h4, h5, h6, a, button, input, select, textarea,
+div, span {
+    font-family : "Vazir"
+}

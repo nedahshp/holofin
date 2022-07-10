@@ -1,0 +1,336 @@
+{% load static i18n %}
+{% get_current_language as LANG %}
+{% get_current_language_bidi as BIDI %}
+{% get_available_languages as LANGUAGES %}
+<!DOCTYPE html>
+<html lang="{{LANG}}" {% if BIDI %}dir="rtl" {% endif %}>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="fontiran.com:license" content="Y68A9">
+    <link rel="icon" href="{% static "build/images/favicon.ico" %}" type="image/ico" />
+    <title> {% block title %} {% trans 'پنل مدیریت' %} | {{settings.site_settings}} {% endblock title %}  </title>
+
+    <!-- select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Persian DatePicker -->
+    <link rel="stylesheet" href="{% static 'css/persian-datepicker.min.css' %}"/>
+
+    {% if BIDI %}
+    <link href="{% static "css/bootstrap-rtl.min.css" %}" rel="stylesheet">
+    {% endif %}
+    <!-- Font Awesome -->
+    <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+
+    <!-- iziToast -->
+    <link rel="stylesheet" href="{% static 'css/iziToast.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/iziToast.min.js' %}"></script> 
+    <script>
+      const TOAST_LEVEL_TAGS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': 'red',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': 'blue',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': 'green',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': 'yellow',
+      };
+      const TOAST_LEVEL_BGS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': '#e74c3ce0',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': '#3498dbe0',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': '#26b99ae0',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': '#f39c12e0',
+      }
+      const TOAST_LEVEL_ICONS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': 'fa fa-ban',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': 'fa fa-info',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': 'fa fa-check',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': 'fa fa-warning',
+      }
+      const TOAST_LEVEL_FGS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': '#fff',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': '#fff',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': '#fff',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': '#fff',
+      }
+      iziToast.settings({
+          position: 'topLeft',
+          timeout: 7000,
+          closeOnClick: true,
+          rtl: true,
+      });
+      const INFO_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+      }
+      const SUCCESS_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+      }
+      const WARNING_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+      }
+      const ERROR_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+      }
+      function showInfoMessage(message, title = '', options = {}) {
+        iziToast.info({
+          title: title,
+          message: message,
+          ...INFO_MESSAGE_OPTIONS,
+        });
+      }
+      function showSuccessMessage(message, title = '', options = {}) {
+        iziToast.success({
+          title: title,
+          message: message,
+          ...SUCCESS_MESSAGE_OPTIONS,
+        });
+      }
+      function showWarningMessage(message, title = '', options = {}) {
+        iziToast.warning({
+          title: title,
+          message: message,
+          ...WARNING_MESSAGE_OPTIONS,
+        });
+      }
+      function showErrorMessage(message, title = '', options = {}) {
+        iziToast.error({
+          title: title,
+          message: message,
+          ...ERROR_MESSAGE_OPTIONS,
+        });
+      }
+    </script>
+
+    <!-- Custom Theme Style -->
+    <link href="{% static "css/custom.min.css" %}" rel="stylesheet">
+    {% if BIDI %}
+    <link href="{% static "css/custom-rtl.min.css" %}" rel="stylesheet">
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
+
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+
+
+    {% block extra_head %}{% endblock %}
+    
+</head>
+<!-- /header content -->
+
+<body class="nav-md">
+    <div id="generalLoader">
+        <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col hidden-print">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="" class="site_title">
+                            <i class="fa fa-institution"></i>
+                            <small>
+                                {{ request.user.institution.name }}
+                            </small>
+                            <div style="clear: both"></div>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <ul class="nav side-menu">
+
+                                <!-- PROFILE BEGIN -->
+                                {% if user.is_authenticated %}
+                                <div class="profile clearfix">
+                                    <div class="profile_pic">
+                                        <img alt="{{user.username}}" class="img-circle profile_img"
+                                            src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'account/profile.png' %}{% endif %}">
+                                    </div>
+                                    <div class="profile_info">
+                                        <div class="sidebar-profile-footer">
+                                            <p>{{ user.first_name }} {{ user.last_name }}</p>
+                                        </div>
+                                        <div class="sidebar-profile-footer hidden-small">
+                                            <span>{{user.get_role_display}}</span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {% endif %}
+                                <!-- PROFILE END -->
+
+                                <!-- DASHBOARD BEGIN -->
+                                <li>
+                                    <a href="{% url 'users:dashboard' %}"><i class="fa fa-dashboard"></i>{% trans 'داشبورد' %}</a>
+                                </li>
+                                <!-- DASHBOARD END -->
+
+                                <!-- INSTITUTION BEGIN -->
+                                {% if request.user.is_staff %}
+                                    <li>
+                                        <a><i class="fa fa-institution"></i>{% trans 'مدیریت' %}<span
+                                                class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{% url 'institution:user_transactions' %}">{% trans 'لیست تراکنش‌ها' %}</a>
+                                            </li>
+                                            <li><a href="{% url 'institution:deposit_request_list' %}">{% trans 'درخواست‌های پرداخت' %}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <a href="{% url 'institution:wallet_history' %}"><i class="fa fa-credit-card"></i>{% trans 'تاریخچه تراکنش‌های من' %}</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'institution:my_deposit_request_history' %}"><i class="fa fa-credit-card"></i>{% trans 'پرداخت‌های من' %}</a>
+                                </li>
+                                <!-- INSTITUTION END -->
+
+
+                                <!-- USERS BEGIN-->
+                                {% if request.user.is_staff %}
+                                <li>
+                                    <a href="{% url 'users:user_list' %}"><i class="fa fa-users"></i>{% trans 'کاربران سایت' %}</a>
+                                </li>
+                                {% endif %}
+                                <!-- USERS END -->
+
+
+                                <!-- CORE APP BEGIN -->
+                                {% if request.user.is_staff %}
+                                <li>
+                                    <a><i class="fa fa-gears"></i>{% trans 'سیستم' %}<span
+                                            class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{% url 'core:backups' %}">{% trans 'فایل‌های پشتیبان' %}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                {% endif %}
+                                <!-- CORE APP END -->
+                                
+
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav hidden-print">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a data-toggle="tooltip" data-placement="top" title="" href="/auth/logout/" data-original-title="خروج">
+                                    <i class="fa fa-power-off" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+            <div class="right_col" role="main">
+                {%block page_content%}
+                {%endblock page_content%}
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer class="hidden-print">
+                <div class="pull-left">
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+
+   <!-- jQuery -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+
+    <!-- Django Jalali -->
+    <script src="{% static "admin/js/django_jalali.min.js" %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <!-- Persian DatePicker -->
+    <script src="{% static 'js/persian-date.min.js' %}"></script>
+    <script src="{% static 'js/persian-datepicker.min.js' %}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{% static "js/custom.min.js" %}"></script>
+
+    <!-- Table To Csv Downloader Script-->
+    <script src="{% static "js/table2csv.js" %}"></script>
+
+    <script>
+        {% for message in messages %}
+            iziToast.show({
+            message: '{{message.message}}',
+            color: TOAST_LEVEL_TAGS['{{message.level}}'],
+            backgroundColor: TOAST_LEVEL_BGS['{{message.level}}'],
+            messageColor: TOAST_LEVEL_FGS['{{message.level}}'],
+            icon: TOAST_LEVEL_ICONS['{{message.level}}'],
+            iconColor: TOAST_LEVEL_FGS['{{message.level}}'],
+            });
+        {% endfor %}
+
+        $(document).ready(function() {
+            hideGeneralLoading();
+        });
+
+
+        function showGeneralLoading() {
+          $('#generalLoader').show();
+        }
+
+        function hideGeneralLoading() {
+          $('#generalLoader').hide();
+        }
+
+    </script>
+
+    <!-- Extra Scripts -->
+    {% block extra_scripts %}{% endblock %}
+</body>
+
+</html>

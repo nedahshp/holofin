@@ -1,0 +1,290 @@
+@import url("https://fonts.googleapis.com/css?family=Niramit:300,300i,700");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.timeline p {
+  font-weight: 300;
+  line-height: 1.5;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.timeline {
+  position: relative;
+  padding-right: 65px;
+  margin: 0 30px 0 0;
+  color: white;
+}
+@media screen and (max-width: 1200px) {
+  .timeline {
+    padding-right: 0;
+    margin: 0;
+  }
+}
+.timeline:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #73869c;
+}
+@media screen and (max-width: 1200px) {
+  .timeline:before {
+    display: none;
+  }
+}
+.timeline .timeline-container {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+.timeline .timeline-container .timeline-icon {
+  position: absolute;
+  right: -88px;
+  top: 4px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 2rem;
+  background: #73869c;
+}
+@media screen and (max-width: 1200px) {
+  .timeline .timeline-container .timeline-icon {
+    display: none;
+  }
+}
+.timeline .timeline-container .timeline-icon i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.timeline .timeline-container .timeline-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.timeline .timeline-container .timeline-body {
+  background: #73869c;
+  border-radius: 3px;
+  padding: 20px 20px 15px;
+  box-shadow: 1px 3px 9px rgba(0, 0, 0, 0.1);
+}
+.timeline .timeline-container .timeline-body:before {
+  content: "";
+  background: inherit;
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  right: -10px;
+  transform: rotate(45deg);
+  border-radius: 0 0 0 2px;
+}
+.timeline .timeline-container .timeline-body .timeline-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+.timeline .timeline-container .timeline-body .timeline-card-header .timeline-title {
+  margin-bottom: 1.4rem;
+}
+.timeline .timeline-container .timeline-body .timeline-card-header .timeline-title .badge {
+  background: #1e1e2f;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.timeline .timeline-container .timeline-body .timeline-card-header .timeline-title small {
+  color: #bcbcbc;
+  display: block;
+  margin-top: 5px;
+}
+.timeline .timeline-container .timeline-body .timeline-card-header .timeline-price {
+  font-size: x-large;
+  color: greenyellow;
+  margin-top: 10px;
+}
+.timeline .timeline-container .timeline-body .timeline-card-subheader {
+  display: flex;
+  justify-content: space-between;
+}
+.timeline .timeline-container .timeline-body .timeline-card-body {
+  margin: 20px 0px;
+}
+.timeline .timeline-container .timeline-body .timeline-card-body table {
+  width: 100%;
+  border: 1px solid #aaa;
+  margin-top: 20px;
+}
+.timeline .timeline-container .timeline-body .timeline-card-body table thead {
+  border-bottom: 1px solid #aaa;
+}
+.timeline .timeline-container .timeline-body .timeline-card-body table tr td, .timeline .timeline-container .timeline-body .timeline-card-body table tr th {
+  padding: 10px;
+}
+.timeline .timeline-container .timeline-body .timeline-card-body table .colspan {
+  text-align: center;
+}
+.timeline .timeline-container.primary .badge,
+.timeline .timeline-container.primary .timeline-icon {
+  background: #1d8cf8 !important;
+}
+.timeline .timeline-container.info .badge,
+.timeline .timeline-container.info .timeline-icon {
+  background: #11cdef !important;
+}
+.timeline .timeline-container.success .badge,
+.timeline .timeline-container.success .timeline-icon {
+  background: #00bf9a !important;
+}
+.timeline .timeline-container.warning .badge,
+.timeline .timeline-container.warning .timeline-icon {
+  background: #ff8d72 !important;
+}
+.timeline .timeline-container.danger .badge,
+.timeline .timeline-container.danger .timeline-icon {
+  background: #fd5d93 !important;
+}
+.timeline .timeline-container .action-buttons {
+  margin-top: 5px;
+  padding: 10px 0px;
+}
+.timeline .timeline-container .action-buttons a {
+  color: #f4f4ff;
+  background-color: #222a42;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 0px;
+  transition: all 0.2s linear;
+}
+.timeline .timeline-container .action-buttons a:hover {
+  background-color: #73869c;
+}
+
+.timeline-image-gallery {
+  padding-top: 20px;
+  display: grid;
+  gap: 1.5rem;
+  text-align: center;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media screen and (max-width: 1920px) {
+  .timeline-image-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 1400px) {
+  .timeline-image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 600px) {
+  .timeline-image-gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.timeline-image-gallery img {
+  margin-bottom: 5px;
+}
+.timeline-image-gallery .image-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #aaa;
+}
+.timeline-image-gallery .image-container:hover {
+  border: 1px solid #aaa;
+}
+.timeline-image-gallery .image-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+}
+.timeline-image-gallery .image-container .header h5 {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.timeline-image-gallery .image-container .header .actions {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bcbcbc;
+  cursor: pointer;
+}
+.timeline-image-gallery .image-container .body {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.timeline-image-gallery .image-container .body a {
+  width: 100%;
+  height: 150px;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.timeline-image-gallery .image-container .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #aaa;
+}
+.timeline-image-gallery .image-container .footer p {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.author {
+  font-family: inherit;
+  padding: 3em;
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+.author a:link,
+.author a:visited {
+  color: white;
+}
+.author a:link:hover,
+.author a:visited:hover {
+  text-decoration: none;
+}
+.author .btn:link,
+.author .btn:visited {
+  margin-top: 1em;
+  text-decoration: none;
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 100;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: black;
+  padding: 1.5em 2rem;
+  border-radius: 1em;
+  transition: 0.5s all;
+}
+.author .btn:link:hover, .author .btn:link:focus, .author .btn:link:active,
+.author .btn:visited:hover,
+.author .btn:visited:focus,
+.author .btn:visited:active {
+  background-color: #1a1a1a;
+}
+
+/*# sourceMappingURL=timeline.css.map */

@@ -1,0 +1,18 @@
+{% extends 'gentellela/auth_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+  <div class="animate form login_form">
+    <section class="login_content">
+      <div style="position: relative; margin:20px 0px;">
+
+        <h1>{% trans 'توجه!' %}</h1>
+        <p>{% trans 'درخواست شما با موفقیت ثبت شد' %}</p>
+        <p>{% trans 'در صورتی که با این آدرس ایمیل در سایت ما ثبت نام کرده باشید، ایمیلی حاوی لینک تغییر رمز برای شما ارسال خواهد شد' %}</p>
+        <div class="login_footer">
+          {% include 'gentellela/page_footer.html' %}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock content %}

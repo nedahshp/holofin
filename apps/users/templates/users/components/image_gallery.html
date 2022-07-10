@@ -1,0 +1,29 @@
+<div class="timeline-image-gallery">
+    {% for img in images %}
+        <div class="image-container">
+            <div class="header">
+                <h5>{{img.get_capture_time_display}}</h5>
+                <div class="actions">
+                    <a href="{% url 'clinic:update_image' img.id %}" class="btn btn-primary btn-sm">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a href="{% url 'clinic:delete_image' img.id %}" class="btn btn-danger btn-sm">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="body">
+                <a href="{{img.image.url}}" target="_blank" 
+                    style="background-image: url('{{img.image_thumbnail.url}}')">
+                </a>
+            </div>
+            {% if img.description %}
+                <div class="footer">
+                    <p>{{img.description}}</p>
+                </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p class="empty-result">هیچ تصویری وجود ندارد</p>
+    {% endfor %}
+</div>

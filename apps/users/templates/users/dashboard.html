@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static jalali_tags %}
+
+{% block extra_head %}
+  <script src="{% static 'js/gauge.min.js' %}"></script>
+{% endblock extra_head %}
+
+{%block page_content%}
+<div class="row" style="display: flex">
+  <div class="col-md-8 col-sm-8 col-xs-12 equal-height-parent">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>
+          صفحه پروفایل کاربر
+          <small>#{{user.id}}</small>
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li>
+            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+          <div class="profile_img">
+            <div id="crop-avatar">
+              <img
+                class="img-responsive avatar-view"
+                src="{{user.avatar_url}}"
+                alt="{{user.display_name}}"
+                title="Change the avatar"
+              />
+            </div>
+          </div>
+          <h3 class="text-3xl my-4 font-medium">{{user.display_name}}</h3>
+          <ul class="list-unstyled user_data">
+            <li class="m-top-xs">
+              <i class="fa fa-list-alt"></i>
+              {{user.national_code|default:'کد ملی تنظیم نشده'}}
+            </li>
+            <li class="m-top-xs">
+              <i class="fa fa-user"></i>
+              تعداد سهم:
+              {{user.deposit_quantity|default:'0'}}
+            </li>
+            <li class="m-top-xs">
+              <i class="fa fa-envelope"></i>
+              {{user.email|default:'آدرس ایمیل تنظیم نشده'}}
+            </li>
+            <li class="m-top-xs">
+              <i class="fa fa-phone"></i>
+              {{user.mobile}}
+            </li>
+          </ul>
+          <a class="btn btn-success" href={% url 'users:update_profile' %}
+            ><i class="fa fa-edit m-right-xs"></i>&nbsp;ویرایش پروفایل</a
+          >
+          <br />
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a
+                  href="#tab_content1"
+                  id="home-tab"
+                  role="tab"
+                  data-toggle="tab"
+                  aria-expanded="true"
+                  >فعالیت اخیر</a
+                >
+              </li>
+              <li role="presentation" class="">
+                <a
+                  href="#tab_content2"
+                  role="tab"
+                  id="profile-tab"
+                  data-toggle="tab"
+                  aria-expanded="false"
+                  >درخواست‌های پرداخت نشده</a
+                >
+              </li>
+              <li role="presentation" class="">
+                <a
+                  href="#tab_content3"
+                  role="tab"
+                  id="profile-tab2"
+                  data-toggle="tab"
+                  aria-expanded="false"
+                  >پروفایل</a
+                >
+              </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div
+                role="tabpanel"
+                class="tab-pane fade active in"
+                id="tab_content1"
+                aria-labelledby="home-tab"
+              >
+                
+              </div>
+              <div
+                role="tabpanel"
+                class="tab-pane fade"
+                id="tab_content2"
+                aria-labelledby="profile-tab"
+              >
+                
+              </div>
+              <div
+                role="tabpanel"
+                class="tab-pane fade"
+                id="tab_content3"
+                aria-labelledby="profile-tab"
+              >
+                <p>
+                  
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock page_content%}
+
+{% block extra_scripts %}
+  <script>
+    var options = {
+      lines:12,
+      angle:0, 
+      lineWidth:.4, 
+      pointer: { 
+        length:.75,
+        strokeWidth:.042,
+        color:"#1D212A"
+      },
+      limitMax:"false",
+      colorStart:"#1ABC9C",
+      colorStop:"#1ABC9C",
+      strokeColor:"#F0F3F3",
+      generateGradient:!0,
+      maxValue:80
+    }
+    var target = document.getElementById('referral_code_gauge');
+    var gauge = new Gauge(target).setOptions(options);
+    gauge.maxValue = 10;
+    gauge.setMinValue(0);
+    gauge.animationSpeed = 32;
+    gauge.set({{user.total_referred_users}});
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      showInfoMessage("کد معرف شما در حافظه کپی شد");
+    }
+  </script>
+{% endblock %}

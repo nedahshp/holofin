@@ -1,0 +1,172 @@
+.card {
+    border: 2px solid;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+.border-pending{
+    border-color: #b29758bb;
+}
+.border-running{
+    border-color: #5c5f7cbb;
+}
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.card .header {
+    padding: 10px;
+    line-height: 20px;
+    text-align: center;
+}
+.card .header small {
+    font-weight: bold;
+}
+.card .body {
+    padding: 10px 10px 5px 10px;
+}
+.signal-table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.signal-table tr {
+    border-bottom: 1px dotted darkgrey;
+    line-height: 25px;
+}
+.signal-table tr td:last-child {
+    text-align: right;
+}
+.signal-table tr td:first-child {
+    text-align: left;
+}
+.signal-table>tbody>tr>td {
+    border-top: none;
+}
+.card .body .action-buttons {
+    padding: 10px 30px;
+}
+.card .body a {
+    padding: 0px;
+    margin: 10px 0px;
+    text-decoration: underline dotted;
+}
+.card .bg-pending {
+    background-color: #b29758;
+}
+.card .bg-running {
+    background-color: #5c5f7c;
+}
+.card .header .sell {
+    color: wheat;
+}
+.card .header .buy {
+    color: wheat;
+}
+
+.card .footer{
+    background-color: lightgray;
+    padding: 12px;
+    line-height: 15px;
+    text-align: center;
+}
+.card .header h4 {
+    margin: 0px;
+}
+.no-bg {
+    background-color: transparent !important;
+}
+.success-card {
+    background-color: #39ad47;
+    color: wheat;
+}
+.failure-card {
+    background-color: #ad3939;
+    color: wheat;
+}
+.canceled-card {
+    background-color: #777;
+    color: wheat;
+}
+.success-card a, .failure-card a, .canceled-card a {
+    color: wheat;
+}
+.signal-image img {
+    width: 100%;
+}
+.signal-mistakes {
+    color: goldenrod;
+    white-space: break-spaces;
+}
+.signal-type-buy {
+    color:green;
+}
+.signal-type-sell {
+    color: darkred;
+}
+.signal-status-running {
+    color:green;
+}
+.signal-status-canceled {
+    color: #73879c;
+}
+.signal-status-filled {
+    color:#73879c;
+}
+.loss {
+    color: darkred;
+}
+.profit {
+    color: limegreen;
+}
+.signal-image img {
+    width: 100%;
+    margin: 10px 0px;
+}
+
+
+/* comments */
+.comments li {list-style: none; margin-bottom: 20px;}
+.comment .avatar {float: right; margin-left: 20px;}
+.comment .body {width: auto;}
+.comment img {width: 100px; border-radius: 50px;}
+.comment-datetime {margin-top: 30px;}
+.comment-datetime div {opacity: 0.5;}
+.new-comment {
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px 5px #eee;
+    padding: 20px;
+    margin-top: 50px;
+}
+.new-comment form textarea {
+    height: 100px;
+    margin-bottom: 5px;
+}
+
+.new-comment h3 {
+    color: #d97c4f;
+}
+.new-comment h3 small {
+    font-size: 50%;
+    margin: 10px;
+}
+
+.timeline .block {
+    margin: 0 125px 0 0;
+}
+
+.timeline .tags {
+    width: 100px;
+}
+
+
+
+
+
+#blink {
+    animation: blink 1.5s linear infinite;
+}
+@keyframes blink{
+0%{opacity: 0;}
+25%{opacity: .5;}
+50%{opacity: 1;}
+75%{opacity: .5;}
+100%{opacity: 0;}
+}

@@ -1,0 +1,19 @@
+
+{% extends 'gentellela/auth_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+  <div class="animate form login_form">
+    <section class="login_content">
+      <div style="position: relative; margin:20px 0px;">
+
+        <h1>{% trans 'تبریک!' %}</h1>
+        <p>{% trans 'حساب کاربری شما با موفقیت ایجاد شد' %}</p>
+        <a class="sub-link" href="{% url 'account_login' %}">{% trans 'برای ورود به حساب کاربری روی این لینک کلیک کنید.' %}</a>
+        <div class="login_footer">
+          {% include 'gentellela/page_footer.html' %}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock content %}

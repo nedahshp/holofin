@@ -1,0 +1,148 @@
+{% load static %}
+<!doctype html>
+<html dir="rtl">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/front.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+    {% block extra_head %}
+        <style>
+            input, select {
+                text-align: left;
+                outline: none;
+                width: 100%;
+                direction: ltr;
+            }
+        </style>
+    {% endblock %}
+
+    <!-- iziToast -->
+    <link rel="stylesheet" href="{% static 'css/iziToast.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/iziToast.min.js' %}"></script> 
+    <script>
+      const TOAST_LEVEL_TAGS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': 'red',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': 'blue',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': 'green',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': 'yellow',
+      };
+      const TOAST_LEVEL_BGS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': '#e74c3ce0',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': '#3498dbe0',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': '#26b99ae0',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': '#f39c12e0',
+      }
+      const TOAST_LEVEL_ICONS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': 'fa fa-ban',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': 'fa fa-info',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': 'fa fa-check',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': 'fa fa-warning',
+      }
+      const TOAST_LEVEL_FGS = {
+        '{{DEFAULT_MESSAGE_LEVELS.ERROR}}': '#fff',
+        '{{DEFAULT_MESSAGE_LEVELS.INFO}}': '#fff',
+        '{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}': '#fff',
+        '{{DEFAULT_MESSAGE_LEVELS.WARNING}}': '#fff',
+      }
+      iziToast.settings({
+          position: 'topLeft',
+          timeout: 7000,
+          closeOnClick: true,
+          rtl: true,
+      });
+      const INFO_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.INFO}}'],
+      }
+      const SUCCESS_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.SUCCESS}}'],
+      }
+      const WARNING_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.WARNING}}'],
+      }
+      const ERROR_MESSAGE_OPTIONS = {
+          color: TOAST_LEVEL_TAGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          backgroundColor: TOAST_LEVEL_BGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          messageColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          icon: TOAST_LEVEL_ICONS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+          iconColor: TOAST_LEVEL_FGS['{{DEFAULT_MESSAGE_LEVELS.ERROR}}'],
+      }
+      function showInfoMessage(message, title = '', options = {}) {
+        iziToast.info({
+          title: title,
+          message: message,
+          ...INFO_MESSAGE_OPTIONS,
+        });
+      }
+      function showSuccessMessage(message, title = '', options = {}) {
+        iziToast.success({
+          title: title,
+          message: message,
+          ...SUCCESS_MESSAGE_OPTIONS,
+        });
+      }
+      function showWarningMessage(message, title = '', options = {}) {
+        iziToast.warning({
+          title: title,
+          message: message,
+          ...WARNING_MESSAGE_OPTIONS,
+        });
+      }
+      function showErrorMessage(message, title = '', options = {}) {
+        iziToast.error({
+          title: title,
+          message: message,
+          ...ERROR_MESSAGE_OPTIONS,
+        });
+      }
+    </script>
+
+
+
+
+    <script src="{% static 'js/tailwind.js' %}"></script>
+    </head>
+    <body>
+        <div class="h-screen flex">
+            <div class="flex w-1/2 i bg-cover bg-right justify-around items-center bg-[url('/static/bg.jpg')]">
+            <div>
+                <h1 class="text-white font-bold text-4xl">کلینیک پوست و مو دکتر قهری</h1>
+                <p class="text-white mt-1">ورود به پنل مدیریت</p>
+                {% comment %} <button type="submit" class="block w-28 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2"></button> {% endcomment %}
+            </div>
+            </div>
+            <div class="flex w-1/2 justify-center items-center bg-white">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+        {% for message in messages %}
+            iziToast.show({
+            message: '{{message.message}}',
+            color: TOAST_LEVEL_TAGS['{{message.level}}'],
+            backgroundColor: TOAST_LEVEL_BGS['{{message.level}}'],
+            messageColor: TOAST_LEVEL_FGS['{{message.level}}'],
+            icon: TOAST_LEVEL_ICONS['{{message.level}}'],
+            iconColor: TOAST_LEVEL_FGS['{{message.level}}'],
+            });
+        {% endfor %}
+    </script>
+    {% block extra_script %}
+    {% endblock extra_script %}
+    </body>
+</html>
