@@ -1,8 +1,10 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
-from .models import User
+from apps.core import utils
 from apps.institution.models import Institution
+from .models import User
 User = get_user_model()
 
 
@@ -119,4 +121,14 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    def clean_username(self):
+        su = super()
+        if hasattr(su, 'clean_username'):
+            su.clean_username()
+        username = self.cleaned_data["username"]
+        username = utils.persian_digits_to_english(username)
+        return username
 

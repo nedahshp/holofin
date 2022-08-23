@@ -1,11 +1,13 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.views import LoginView
 from django.http import request
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.views.generic import View, FormView, TemplateView
-from .auth_forms import LoginPasswordForm, MobileForm, RegisterForm
+
+from .auth_forms import LoginPasswordForm, MobileForm, RegisterForm, CustomAuthenticationForm
 User = get_user_model()
 
 class RegisterView(FormView):
@@ -27,3 +29,5 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse('users:dashboard'))
 
+class CustomLoginView(LoginView):
+    form_class = CustomAuthenticationForm
