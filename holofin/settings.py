@@ -130,8 +130,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'fa'
 TIME_ZONE = 'Asia/Tehran'
-USE_I18N = False
-USE_TZ = False
+USE_I18N = True
+USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static_root'
