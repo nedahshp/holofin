@@ -43,7 +43,7 @@ class UserTransaction(AbstractModel):
 
 
 class DepositRequest(AbstractModel):
-    amount = models.PositiveIntegerField(verbose_name='مقدار')
+    amount = models.PositiveIntegerField(verbose_name='مقدار' ,null=True,)
     description = models.TextField(verbose_name='توضیحات', null=True, blank=True)
     created_by = models.ForeignKey('users.User', on_delete=models.PROTECT, related_name='created_deposit_requests')
     institution = models.ForeignKey('institution.Institution', on_delete=models.PROTECT, related_name='deposit_requests')
